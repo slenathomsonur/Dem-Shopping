@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dem Shopping - Everything Free!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            color: #1a1a1a;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #232f3e;
+            color: white;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 10px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff9900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        .search-bar {
+            display: flex;
+            flex: 1;
+            max-width: 700px;
+            margin: 0 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .search-bar button {
+            padding: 10px 15px;
+            background: #ff9900;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .header-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .nav-item span:first-child {
+            font-size: 12px;
+        }
+        
+        .nav-item span:last-child {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .cart {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .header-bottom {
+            display: flex;
+            gap: 15px;
+            padding: 8px 0;
+            overflow-x: auto;
+        }
+        
+        .header-bottom a {
+            color: white;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 300px;
+            background: linear-gradient(to right, #232f3e, #ff9900);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #ff9900;
+            display: inline-block;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            height: 200px;
+            width: 100%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-price.free {
+            color: #27ae60;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: #ff9900;
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #3498db;
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: #232f3e;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 15px;
+            color: #ff9900;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: #ff9900;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #3a4553;
+        }
+        
+        /* Settings Panel */
+        .settings-panel {
+            position: fixed;
+            right: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .settings-panel.open {
+            right: 0;
+        }
+        
+        .settings-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .close-settings {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .settings-option {
+            margin-bottom: 15px;
+        }
+        
+        .settings-option h4 {
+            margin-bottom: 8px;
+        }
+        
+        .theme-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .theme {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .theme.default {
+            background: #232f3e;
+        }
+        
+        .theme.dark {
+            background: #1a1a1a;
+        }
+        
+        .theme.light {
+            background: #f0f2f5;
+            border: 1px solid #ccc;
+        }
+        
+        .theme.blue {
+            background: #3498db;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-wrap: wrap;
+            }
+            
+            .search-bar {
+                order: 3;
+                margin: 10px 0;
+                max-width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-top">
+            <a href="#" class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                Dem Shopping
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for anything...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="header-nav">
+                <div class="nav-item" onclick="openSettings()">
+                    <span>Hello, User</span>
+                    <span>Account & Settings</span>
+                </div>
+                
+                <div class="nav-item">
+                    <span>Returns</span>
+                    <span>& Orders</span>
+                </div>
+                
+                <div class="cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Cart (0)</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-bottom">
+            <a href="#">All</a>
+            <a href="#">Today's Deals</a>
+            <a href="#">Electronics</a>
+            <a href="#">Books</a>
+            <a href="#">Fashion</a>
+            <a href="#">Home & Kitchen</a>
+            <a href="#">Sports</a>
+            <a href="#">Beauty</a>
+            <a href="#">Food</a>
+            <a href="#">Health</a>
+            <a href="#">Toys</a>
+            <a href="#">Garden</a>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Everything is FREE at Dem Shopping!</h1>
+        <p>Yes, you read that right. Every product on our platform is completely free. No hidden charges, no fees.</p>
+    </div>
+    
+    <!-- Featured Products -->
+    <section class="products">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/3498db/ffffff?text=Smartphone" alt="Smartphone">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Latest Smartphone - 128GB Storage</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/e74c3c/ffffff?text=Headphones" alt="Headphones">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Wireless Noise-Cancelling Headphones</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/2ecc71/ffffff?text=Laptop" alt="Laptop">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Ultra-Thin Laptop - 15.6" Display</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/9b59b6/ffffff?text=Smart+Watch" alt="Smart Watch">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Smart Watch with Fitness Tracking</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Popular Products -->
+    <section class="products">
+        <h2 class="section-title">Popular Right Now</h2>
+        <div class="product-grid">
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/f39c12/ffffff?text=Gaming+Console" alt="Gaming Console">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Next-Gen Gaming Console</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/34495e/ffffff?text=Camera" alt="Camera">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">4K Digital Camera with Accessories</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/16a085/ffffff?text=Books" alt="Books">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Bestselling Book Collection (Set of 12)</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 8 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/250x200/d35400/ffffff?text=Home+Speaker" alt="Home Speaker">
+                </div>
+                <div class="product-info">
+                    <div class="product-title">Wireless Home Speaker System</div>
+                    <div class="product-price free">FREE</div>
+                    <div class="product-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">About Dem Shopping</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                    <li><a href="#">Advantage Partners</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell on Dem Shopping</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Your Account</a></li>
+                    <li><a href="#">Your Orders</a></li>
+                    <li><a href="#">Shipping Rates & Policies</a></li>
+                    <li><a href="#">Returns & Replacements</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Let Us Help You</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Site Map</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Dem Shopping. All rights reserved. Everything is free!</p>
+        </div>
+    </footer>
+    
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-header">
+            <h3>Account & Settings</h3>
+            <button class="close-settings" onclick="closeSettings()">&times;</button>
+        </div>
+        
+        <div class="settings-option">
+            <h4>Account Information</h4>
+            <p>Name: Demo User</p>
+            <p>Email: user@demshopping.com</p>
+        </div>
+        
+        <div class="settings-option">
+            <h4>Theme</h4>
+            <p>Change the appearance of Dem Shopping</p>
+            <div class="theme-selector">
+                <div class="theme default" title="Default Theme"></div>
+                <div class="theme dark" title="Dark Mode"></div>
+                <div class="theme light" title="Light Mode"></div>
+                <div class="theme blue" title="Blue Theme"></div>
+            </div>
+        </div>
+        
+        <div class="settings-option">
+            <h4>Language</h4>
+            <select>
+                <option>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+                <option>German</option>
+            </select>
+        </div>
+        
+        <div class="settings-option">
+            <h4>Notifications</h4>
+            <label>
+                <input type="checkbox" checked> Email Notifications
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" checked> Browser Notifications
+            </label>
+        </div>
+        
+        <div class="settings-option">
+            <h4>Privacy</h4>
+            <p>Manage your privacy settings</p>
+            <button class="btn btn-primary">Privacy Dashboard</button>
+        </div>
+    </div>
+    
+    <script>
+        // Settings Panel functionality
+        function openSettings() {
+            document.getElementById('settingsPanel').classList.add('open');
+        }
+        
+        function closeSettings() {
+            document.getElementById('settingsPanel').classList.remove('open');
+        }
+        
+        // Add to Cart functionality
+        const addToCartButtons = document.querySelectorAll('.btn-primary');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const cart = document.querySelector('.cart span');
+                const currentCount = parseInt(cart.textContent.match(/\d+/)[0]);
+                cart.textContent = `Cart (${currentCount + 1})`;
+                
+                alert('Item added to cart! Remember, everything is free!');
+            });
+        });
+        
+        // Search functionality
+        const searchButton = document.querySelector('.search-bar button');
+        searchButton.addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-bar input').value;
+            if (searchTerm) {
+                alert(`Searching for: ${searchTerm}\nAll results are free!`);
+            }
+        });
+        
+        // Allow pressing Enter to search
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
